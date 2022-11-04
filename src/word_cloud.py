@@ -2,6 +2,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
 from wordcloud.wordcloud import WordCloud, STOPWORDS
+from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
+
+
 ap = argparse.ArgumentParser()
 
 ap.add_argument("-d", "--data", required=True, help="Your Dataset")
@@ -9,9 +12,11 @@ ap.add_argument("-d", "--data", required=True, help="Your Dataset")
 args = vars(ap.parse_args())
 
 def create_wordcloud(dataset) :
+  stop_factory = StopWordRemoverFactory()
+  STOPWORD = stop_factory.get_stop_words() + list(STOPWORDS)
   df = pd.read_csv("data/" + dataset + ".csv")
   comment_words = ""
-  stopwords = set(STOPWORDS)
+  stopwords = set(STOPWORD)
   
   for val in df.content :
     val = str(val)
