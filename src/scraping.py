@@ -5,12 +5,13 @@ import argparse
 
 ap = argparse.ArgumentParser()
 
-ap.add_argument("-s", "--star", required=True, help="star review")
-ap.add_argument("-d", "--data", required=True, help="app name")
-ap.add_argument("-lang", "--language", required=False, help="reviews language")
+ap.add_argument("-n", "--name", required=True, help="app name")
+ap.add_argument("-rate", "--rating", required=True, help="rating review")
+ap.add_argument("-l", "--language", required=False, help="reviews language")
 ap.add_argument("-c", "--country", required=False, help="user country")
 
 args = vars(ap.parse_args())
+
 print("""
                     ____                       _             
                    / ___|  ___ _ __ __ _ _ __ (_)_ __   __ _ 
@@ -19,6 +20,7 @@ print("""
                    |____/ \___|_|  \__,_| .__/|_|_| |_|\__, |
                                         |_|            |___/ 
 """)
+
 def search_user_reviews(star, name_code) -> pd.DataFrame:
   review, _ = reviews(
       name_code,
@@ -32,11 +34,11 @@ def search_user_reviews(star, name_code) -> pd.DataFrame:
   print("Total scraped data = ", len(review))
   return df
 
-def search_app(star, name, language="en", country="us") -> None :
+def search_app(star, name) -> None :
   result = search(
     name,
-    lang=language,
-    country=country,
+    lang="id",
+    country="id",
     n_hits=1
   )
   name_code = ""
@@ -48,4 +50,4 @@ def search_app(star, name, language="en", country="us") -> None :
   df.to_csv("data/" + name + "_" + star + "star.csv", index=False)
 
 if __name__ == "__main__" :
-  search_app(args["star"], args["data"])
+  search_app(args["rating"], args["name"])

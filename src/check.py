@@ -3,7 +3,7 @@ import argparse
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-n", "--name", help="app name")
-ap.add_argument("-s", "--star", help="review star")
+ap.add_argument("-rate", "--rating", help="Rating user reviews")
 ap.add_argument("-q", "--quantity", required=False, help="quantity?")
 
 args = vars(ap.parse_args())
