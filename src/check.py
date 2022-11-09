@@ -17,4 +17,4 @@ def check_dataset(name, star, quantity) -> None :
     
 
 if __name__ == "__main__":
-  check_dataset(args["name"], args["star"], args["quantity"])
+  check_dataset(args["name"], args["rating"], args["quantity"])
