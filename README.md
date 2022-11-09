@@ -8,6 +8,14 @@
 ## Description
 Sebuah alat sederhana untuk melakukan scraping dan memvisualisasikan menggunakan wordcloud reviews sebuah aplikasi yang ada pada playstore
 
+## Installation
+```
+# Python version 3.7 or newer
+$ git clone https://github.com/afrizal0/playscrape.git
+$ cd playscrape
+$ pip3 install -r requirements.txt
+```
+
 ## Arguments
 ```
 # Scraping
