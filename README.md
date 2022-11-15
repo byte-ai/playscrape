@@ -11,7 +11,7 @@ Sebuah alat sederhana untuk melakukan scraping dan memvisualisasikan menggunakan
 ## Installation
 ```
 # Python version 3.7 or newer
-$ git clone https://github.com/afrizal0/playscrape.git
+$ git clone https://github.com/byte-ai/playscrape.git
 $ cd playscrape
 $ pip3 install -r requirements.txt
 ```
