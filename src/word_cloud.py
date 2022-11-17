@@ -7,17 +7,17 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 
 ap = argparse.ArgumentParser()
 
-ap.add_argument("-d", "--name", required=True, help="Your Dataset")
-ap.add_argument("-r", "--rating", required=True, help="User reviews rating")
+ap.add_argument("-n", "--name", required=True, help="Your Dataset")
+ap.add_argument("-rate", "--rating", required=True, help="User reviews rating")
 
 args = vars(ap.parse_args())
 
 def create_wordcloud(name, rating) :
   stop_factory = StopWordRemoverFactory()
-  STOPWORD = stop_factory.get_stop_words() + list(STOPWORDS)
-  df = pd.read_csv("data/" + name + rating + ".csv")
+  stop_word = stop_factory.get_stop_words() + list(STOPWORDS)
+  df = pd.read_csv("data/" + name + "_" + rating + "star.csv")
   comment_words = ""
-  stopwords = set(STOPWORD)
+  stopword = set(stop_word)
   
   for val in df.content :
     val = str(val)
@@ -31,8 +31,8 @@ def create_wordcloud(name, rating) :
     comment_words += " ".join(tokens) + " "
     
   words_cloud = WordCloud(width = 800, height = 800,
-                background_color ='black',
-                stopwords = stopwords,
+                background_color ='white',
+                stopwords = stopword,
                 min_font_size = 10).generate(comment_words)
 
   plt.figure(figsize = (8, 8), facecolor = None)
