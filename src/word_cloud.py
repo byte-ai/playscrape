@@ -1,5 +1,8 @@
+import tkinter
 import pandas as pd
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
 import argparse
 from wordcloud.wordcloud import WordCloud, STOPWORDS
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -8,14 +11,15 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 ap = argparse.ArgumentParser()
 
 ap.add_argument("-d", "--name", required=True, help="Your Dataset")
-ap.add_argument("-r", "--rating", required=True, help="User reviews rating")
+ap.add_argument("-s", "--star", required=True, help="User reviews star")
+ap.add_argument("-l", "--language", required=True, help="Language user use")
 
 args = vars(ap.parse_args())
 
-def create_wordcloud(name, rating) :
+def create_wordcloud(name, star, language) -> None :
   stop_factory = StopWordRemoverFactory()
   STOPWORD = stop_factory.get_stop_words() + list(STOPWORDS)
-  df = pd.read_csv("data/" + name + rating + ".csv")
+  df = pd.read_csv("../data/" + name + "_" + star + "star_" + language +  ".csv")
   comment_words = ""
   stopwords = set(STOPWORD)
   
@@ -39,8 +43,7 @@ def create_wordcloud(name, rating) :
   plt.imshow(words_cloud)
   plt.axis("off")
   plt.tight_layout(pad = 0)
-  
   plt.show()
 
 if __name__ == "__main__" :
-  create_wordcloud(args["name"], args["rating"])
+  create_wordcloud(args["name"], args["star"], args["language"])
